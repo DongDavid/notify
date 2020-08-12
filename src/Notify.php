@@ -10,6 +10,7 @@ class Notify
         'email'=>'Email',
         'wechatoffical'=>'WechatOffical',
         'wechatwork'=>'WechatWork',
+        'miniprogram'=>'MiniProgram',
     ];
     private static function buildConnector($type)
     {

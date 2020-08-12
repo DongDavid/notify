@@ -11,9 +11,12 @@ $ composer require dongdavid/notify -vvv
 
 ## Usage
 
-TODO  
 
-### 邮件 
+有两种使用方式，一种是直接将配置参数一并传入，另一种是定义`config`方法来获取配置，传入配置名称
+
+### 第一种方式  
+
+#### 邮件 
 
 ```php
 $mail = [
@@ -49,7 +52,7 @@ $notify = new Notify();
 $notify->send($mail);
 ```
 
-### 企业微信  
+#### 企业微信  
 
 ```php
 $qy = [
@@ -73,10 +76,10 @@ $qy = [
 ];
 
 $notify = new Notify();
-$notify->send($mail);
+$notify->send($qy);
 ```
 
-### 微信公众号  
+#### 微信公众号  
 
 ```php
 $wechat = [
@@ -113,9 +116,123 @@ $wechat = [
     ],
 ];
 $notify = new Notify();
-$notify->send($mail);
+$notify->send($notify);
 ```
 
+
+#### 微信小程序  
+
+```php
+$wechat = [
+    'type'   => 'miniprogram',
+    'config' => [
+        'type'      => 'miniprogram',
+        'signature' => 'mini_xxx',
+        'appid'     => 'xxx',
+        'appsecret' => 'xxxx',
+    ],
+    'msg'    => [
+        'touser'            => 'oBEIa0cr36R6FTCppAvgKLoKG9FY',
+        'template_id'       => '0OHAj375XtCEVwJaASmRv79c4KhlqzN_mtsmNn6qHGg',
+        'page'              => '',
+        'miniprogram_state' => 'developer', //跳转小程序类型：developer为开发版；trial为体验版；formal为正式版；默认为正式版
+        'data'              => [
+            'thing1' => [
+                'value' => '哈喽，我是first one',
+            ],
+            'time2'  => [
+                'value' => date('Y-m-d H:i'),
+            ],
+        ],
+    ],
+];
+$notify = new Notify();
+$notify->send($notify);
+```
+### 第二种方式  
+
+```php
+function config($config_name)
+{
+    $config = [
+        'notify_config'=>[
+            'work_xxx_1000002' => [
+                'type'      => 'wechatwork',
+                'signature' => 'work_xxx_1000002',
+                'appid'     => 'xxx',
+                'appsecret' => 'xxxxx',
+                'agentid'   => '1000002',
+            ],
+            'offical_xxx'      => [
+                'type'      => 'wechatoffical',
+                'signature' => 'offical_xxx',
+                'appid'     => 'xxx',
+                'appsecret' => 'xxx',
+            ],
+            'email_tx'                        => [
+                'type'       => 'email',
+                'signature'  => 'email_tx',
+                'host'       => 'smtp.exmail.qq.com',
+                'port'       => '465',
+                'username'   => 'noreply@xxx.com',
+                'password'   => '', //腾讯的要用专用密码登陆
+                'SMTPSecure' => 'ssl',
+                'fromEmail'  => 'noreply@xxx.com',
+                'fromName'   => 'name',
+
+            ],
+            'mini_xxx'         => [
+                'type'      => 'miniprogram',
+                'signature' => 'mini_xxx',
+                'appid'     => 'xxx',
+                'appsecret' => 'xxxxx',
+            ],
+        ]
+    ];
+    return $config[$config_name];
+}
+
+$data = [
+    'type'   => 'email',
+    'config' => 'email_tx',
+    'msg'    => [
+        .
+        .
+        .
+    ],
+];
+
+$data = [
+    'type'   => 'wechatwork',
+    'config' => 'work_xxx_1000002',
+    'msg'    => [
+        .
+        .
+        .
+    ],
+];
+$data = [
+    'type'   => 'wechatoffical',
+    'config' => 'offical_xxx',
+    'msg'    => [
+        .
+        .
+        .
+    ],
+];
+$data = [
+    'type'   => 'miniprogram',
+    'config' => 'mini_xxx',
+    'msg'    => [
+        .
+        .
+        .
+    ],
+];
+
+$notify = new Notify();
+$notify->send($data);
+```
 
 
 ## Test  

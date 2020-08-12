@@ -76,7 +76,7 @@ class WechatManager
         if ($data['expire_time'] > time()) {
             return $data['ticket'];
         }
-        return self::updateAccessToken($signature);
+        return self::updateAccessToken($config);
     }
 
     // 刷新access_token 建议定时执行
@@ -93,7 +93,7 @@ class WechatManager
                 $result = self::getMiniAccessToken($config['appid'],$config['appsecret']);
                 break;
             default:
-                throw new \Exception('无效的公众号类型');
+                throw new \Exception('无效的公众号类型:'.$config['type']);
                 break;
         }
         $key = 'access_token-' . $config['signature'];

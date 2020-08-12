@@ -1,6 +1,11 @@
 <?php
 namespace Dongdavid\Notify\sender;
 
+use Dongdavid\Notify\Sender;
+use Dongdavid\Notify\WechatManager;
+use Dongdavid\Notify\Exceptions\InvalidArgumentException;
+
+
 /**
  *
  */
@@ -8,7 +13,6 @@ class MiniProgram extends Sender
 {
     const MESSAGE_URL = 'https://api.weixin.qq.com/cgi-bin/message/subscribe/send?access_token=';
 
-    // 0OHAj375XtCEVwJaASmRv79c4KhlqzN_mtsmNn6qHGg
     public function checkConfig()
     {
         if (!isset($this->config['signature'])) {

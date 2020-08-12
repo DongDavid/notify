@@ -13,10 +13,6 @@ class Email extends Sender
 
 	public function checkConfig(){
 
-		if (!isset($this->config['callback_url'])) {
-			// throw new \Exception("notify config require callback url");
-		}
-
 		if (!isset($this->config['host'])) {
 			throw new \Exception("mail config require host");
 		}

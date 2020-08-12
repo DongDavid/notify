@@ -69,49 +69,38 @@ class WechatManager
     }
 
     // 获取access_token
-    public static function getAccessToken($signature)
+    public static function getAccessToken($config)
     {
-        $key = 'access_token-'.$signature;
+        $key = 'access_token-'.$config['signature'];
         $data = Redis::get($key);
         if ($data['expire_time'] > time()) {
             return $data['ticket'];
         }
         return self::updateAccessToken($signature);
     }
-    private static function getConfigBySignature($signature)
-    {
-        if (!isset(config('notify_config')[$signature])) {
-            throw new \Exception("配置不存在");
 
-        }
-        return config('notify_config')[$signature];
-    }
     // 刷新access_token 建议定时执行
-    public static function updateAccessToken($signature)
+    public static function updateAccessToken($config)
     {
-        $wechat = self::getConfigBySignature($signature);
-        if (!$wechat) {
-            throw new \Exception('无效的signature');
-        }
-        switch ($wechat['type']) {
+        switch ($config['type']) {
             case 'wechatoffical':
-                $result = self::getOfficalAccessToken($wechat['appid'],$wechat['appsecret']);
+                $result = self::getOfficalAccessToken($config['appid'],$config['appsecret']);
                 break;
             case 'wechatwork':
-                $result = self::getWorkAccessToken($wechat['appid'], $wechat['appsecret']);
+                $result = self::getWorkAccessToken($config['appid'], $config['appsecret']);
                 break;
             case 'miniprogram':
-                $result = self::getMiniAccessToken($wechat['appid'],$wechat['appsecret']);
+                $result = self::getMiniAccessToken($config['appid'],$config['appsecret']);
                 break;
             default:
                 throw new \Exception('无效的公众号类型');
                 break;
         }
-        $key = 'access_token-' . $signature;
+        $key = 'access_token-' . $config['signature'];
         $data = [
             'ticket'=>$result['access_token'],
             'type'=>'access_token',
-            'signature'=>$signature,
+            'signature'=>$config['signature'],
             'expire_time'=>$result['expire_time'],
         ];
 

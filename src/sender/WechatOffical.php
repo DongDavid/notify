@@ -15,10 +15,16 @@ class WechatOffical extends Sender
 	public function checkConfig()
 	{
 		if (!isset($this->config['signature'])) {
-			throw new \Exception("WechatWork config require signature");
+			throw new \Exception("WechatOffical config require signature");
 		}
+        if (!isset($this->config['appid'])) {
+            throw new \Exception("WechatOffical config require appid");
+        }
+        if (!isset($this->config['appsecret'])) {
+            throw new \Exception("WechatOffical config require appsecret");
+        }
 
-        $this->config['access_token'] = WechatManager::getAccessToken($this->config['signature']);
+        $this->config['access_token'] = WechatManager::getAccessToken($this->config);
         if (!$this->config['access_token']) {
             throw new InvalidArgumentException("notify config require access_token ");
         }
@@ -59,7 +65,7 @@ class WechatOffical extends Sender
             return true;
         } else {
             if (in_array($res['errcode'], ['40014', '41001', '42001'])) {
-                $this->config['access_token'] = WechatManager::updateAccessToken($this->config['signature']);
+                $this->config['access_token'] = WechatManager::updateAccessToken($this->config);
             }
             throw new \Exception("发送失败:" . $res['errcode'] . $res['errmsg']);
         }

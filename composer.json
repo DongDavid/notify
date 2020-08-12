@@ -1,0 +1,20 @@
+{
+    "name": "dongdavid\/notify",
+    "description": "消息通知发送组件",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "DongDavid",
+            "email": "ddv576029053@outlook.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^6.3",
+        "phpmailer/phpmailer": "^6.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Dongdavid\\Notify\\": "src"
+        }
+    }
+}

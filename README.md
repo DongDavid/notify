@@ -1,6 +1,15 @@
-<h1 align="center"> notify </h1>
+# 消息发送组件  
+
 
 <p align="center"> 消息通知发送组件.</p>
+
+
+## Requirements  
+
+* PHP >= 7.0.0
+* Redis PHP Extension
+* guzzlehttp/guzzle ^6.3
+* phpmailer/phpmailer ^ 6.1
 
 
 ## Installing
@@ -8,6 +17,7 @@
 ```shell
 $ composer require dongdavid/notify -vvv
 ```
+
 
 ## Usage
 
@@ -48,8 +58,7 @@ $mail = [
     ],
 ];
 
-$notify = new Notify();
-$notify->send($mail);
+Notify::send($mail);
 ```
 
 #### 企业微信  
@@ -75,8 +84,7 @@ $qy = [
     ],
 ];
 
-$notify = new Notify();
-$notify->send($qy);
+Notify::send($qy);
 ```
 
 #### 微信公众号  
@@ -115,8 +123,7 @@ $wechat = [
         ],
     ],
 ];
-$notify = new Notify();
-$notify->send($notify);
+Notify::send($notify);
 ```
 
 
@@ -146,10 +153,34 @@ $wechat = [
         ],
     ],
 ];
-$notify = new Notify();
-$notify->send($notify);
+Notify::send($notify);
 ```
 ### 第二种方式  
+
+在框架中使用,或者自定义一个`config`方法来获取配置  
+
+在`Sender.php`中会使用`config('notify_config')`来获取所有的消息发送配置，
+所以需要确保你能够通过`config('notify_config')['config_name']`来获取到对应的配置
+
+```php
+public function setConfig($config)
+{
+    if (is_string($config)) {
+        if (!isset(config('notify_config')[$config])) {
+            throw new InvalidArgumentException("无效的配置:".$config);
+        }
+        $this->config = config('notify_config')[$config];
+    }else{
+        $this->config = $config;
+    }
+
+
+    // 检查配置是否完整
+    $this->checkConfig();
+
+    return $this;
+}
+```
 
 ```php
 function config($config_name)
@@ -230,8 +261,7 @@ $data = [
     ],
 ];
 
-$notify = new Notify();
-$notify->send($data);
+Notify::send($data);
 ```
 
 

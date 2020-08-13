@@ -289,6 +289,11 @@ composer require dongdaivd/notify:dev-master
 touch index.php
 ```
 
+## TODO  
+
+* 增加单元测试
+* 增加结合think-queue实现消息发送队列教程
+
 ## Contributing
 
 You can contribute in one of three ways:

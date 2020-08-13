@@ -1,0 +1,45 @@
+<?php
+namespace Dongdavid\Notify\Tests;
+
+use Dongdavid\Notify\Notify;
+use PHPUnit\Framework\TestCase;
+
+/**
+ *
+ */
+class NotifyTest extends TestCase
+{
+
+    public function testSetRedisConfigWithInvalidConfig()
+    {
+
+        // 断言会抛出此异常类
+        $this->expectException(\Exception::class);
+
+        // 断言异常消息为 'Invalid type value(base/all): foo'
+        $this->expectExceptionMessage('非法的配置');
+
+        Notify::setRedisConfig([]);
+
+        $this->fail('Failed to assert setRedisConfig throw exception with invalid argument.');
+    }
+
+    public function testNameWithInvalidType()
+    {
+        // 断言会抛出此异常类
+        $this->expectException(\Exception::class);
+
+        // 断言异常消息为 'Invalid type value(base/all): foo'
+        $this->expectExceptionMessage('错误的通知类型:what');
+
+        Notify::name('what');
+
+        $this->fail('Failed to assert setRedisConfig throw exception with invalid argument.');
+
+    }
+    public function testNameWithValidType()
+    {
+        $sender = Notify::name('miniprogram');
+        $this->assertIsObject($sender,'返回的不是sender对象');
+    }
+}

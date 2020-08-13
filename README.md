@@ -21,6 +21,18 @@ $ composer require dongdavid/notify -vvv
 
 ## Usage
 
+如使用微信公众号/企业微信/微信小程序消息通知，则需要配置redis缓存access_token  
+
+```php
+# 默认配置
+Notify::setRedisConfig([
+    'host'     => '127.0.0.1',
+    'port'     => '6379',
+    'password' => '',
+    'select'   => 6,
+    'timeout'  => 3,
+]);
+```
 
 有两种使用方式，一种是直接将配置参数一并传入，另一种是定义`config`方法来获取配置，传入配置名称
 

@@ -17,11 +17,11 @@ class Redis
     ];
 
     // 覆盖redis连接配置
-    public function setConfig($config)
+    public static function setConfig($config)
     {
         foreach (self::$redisConfig as $k => $v) {
             if (isset($config[$k])) {
-                self::$redisConfig[$k] = $v;
+                self::$redisConfig[$k] = $config[$k];
             }
         }
     }

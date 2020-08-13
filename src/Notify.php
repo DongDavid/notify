@@ -1,6 +1,7 @@
 <?php
 namespace Dongdavid\Notify;
 
+use Dongdavid\Notify\utils\Redis;
 /**
  *
  */
@@ -32,6 +33,11 @@ class Notify
     public static function name($type)
     {
         return self::buildConnector($type);
+    }
+
+    public static function setRedisConfig($config)
+    {
+        Redis::setConfig($config);
     }
 
 }

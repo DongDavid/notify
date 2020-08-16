@@ -1,13 +1,14 @@
 # 消息发送组件  
 
 
-<p align="center"> 消息通知发送组件.</p>
-
 [![Build Status](https://travis-ci.com/DongDavid/notify.svg?branch=master)](https://travis-ci.com/DongDavid/notify)
+[![StyleCI](https://github.styleci.io/repos/286964633/shield)](https://github.styleci.io/repos/286964633)
+[![Total Downloads](https://poser.pugx.org/dongdavid/notify/downloads)](https://packagist.org/packages/dongdavid/notify)
+[![License](https://poser.pugx.org/dongdavid/notify/license)](https://packagist.org/packages/dongdavid/notify)  
 
-[![StyleCI](https://github.styleci.io/repos/286964633/shield)](https://github.styleci.io/repos/286964633/shield)
-[![Download](https://packagist.org/packages/dongdavid/notify)](https://poser.pugx.org/dongdavid/notify/downloads)
-[![License](https://packagist.org/packages/dongdavid/notify)](https://poser.pugx.org/dongdavid/notify/license)
+
+
+
 
 ## Requirements  
 

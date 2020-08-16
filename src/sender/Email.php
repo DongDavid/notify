@@ -156,12 +156,11 @@ class Email extends Sender
 		    $mail->AltBody = '请使用支持html的邮箱客户端，以取得更好的浏览体验';
 		    $r = $mail->send();
 		    if (!$r) {
-		    	throw new \Exception("邮件发送失败");
+		    	throw new \Exception("邮件发送失败:".$mail->ErrorInfo);
 		    }
 		    return true;
 		} catch (\Exception $e) {
-			trace("邮件发送失败".$mail->ErrorInfo,'error');
-			throw new \Exception('邮件发送失败'.$e->getMessage());
+			throw new \Exception('邮件发送失败:'.$e->getMessage().$e->getLine());
 
 		}
 	}

@@ -40,6 +40,48 @@ class NotifyTest extends TestCase
     public function testNameWithValidType()
     {
         $sender = Notify::name('miniprogram');
-        $this->assertIsObject($sender,'返回的不是sender对象');
+        $this->assertIsObject($sender, '返回的不是sender对象');
+    }
+
+    public function testSendWechatWork()
+    {
+        // 设置Http和Redis的mock
+        UtilsTest::setUtilsMock();
+        $data = UtilsTest::getData('wechatwork');
+        $res = Notify::send($data);
+        $this->assertSame(true, $res);
+    }
+    public function testSendWechatOffical()
+    {
+        // 设置Http和Redis的mock
+        UtilsTest::setUtilsMock();
+        $data = UtilsTest::getData('wechatoffical');
+        $res = Notify::send($data);
+        $this->assertSame(true, $res);
+    }
+    public function testSendMiniProgram()
+    {
+        // 设置Http和Redis的mock
+        UtilsTest::setUtilsMock();
+        $data = UtilsTest::getData('minprogram');
+        $res = Notify::send($data);
+        $this->assertSame(true, $res);
+    }
+    public function testSendEmail()
+    {
+        // 设置Http和Redis的mock
+        // UtilsTest::setUtilsMock();
+        // $mail = \Mockery::mock('overload:\PHPMailer\PHPMailer\PHPMailer');
+        // $mail->shouldReceive('send')
+        //      ->once()
+        //      ->withAnyArgs()
+        //      ->andReturn(true);
+        // $phpmailer = \Mockery::mock(\PHPMailer\PHPMailer\PHPMailer::class);
+        // $phpmailer->allows()->send()->andReturn(true);
+
+
+        // $data = UtilsTest::getData('email');
+        // $res = Notify::send($data);
+        // $this->assertSame(true, $res);
     }
 }

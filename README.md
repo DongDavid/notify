@@ -3,10 +3,15 @@
 
 <p align="center"> 消息通知发送组件.</p>
 
+[![Build Status](https://travis-ci.com/DongDavid/notify.svg?branch=master)](https://travis-ci.com/DongDavid/notify)
+
+[![StyleCI](https://github.styleci.io/repos/286964633/shield)](https://github.styleci.io/repos/286964633/shield)
+[![Download](https://packagist.org/packages/dongdavid/notify)](https://poser.pugx.org/dongdavid/notify/downloads)
+[![License](https://packagist.org/packages/dongdavid/notify)](https://poser.pugx.org/dongdavid/notify/license)
 
 ## Requirements  
 
-* PHP >= 7.0.0
+* PHP >= 5.6
 * Redis PHP Extension
 * guzzlehttp/guzzle ^6.3
 * phpmailer/phpmailer ^ 6.1

@@ -49,13 +49,13 @@ class WechatOffical extends Sender
         // 发送
         $res = $this->sendTemplate($msg);
 
-        if (isset($res['code']) && $res['code'] == 0) {
+        if (isset($res['code']) && 0 == $res['code']) {
             return true;
         }
         if (!isset($res['errcode'])) {
             throw new \Exception('发送失败:网络错误,无法请求微信服务器');
         }
-        if ($res['errcode'] == 0) {
+        if (0 == $res['errcode']) {
             return true;
         } else {
             if (in_array($res['errcode'], ['40014', '41001', '42001'])) {

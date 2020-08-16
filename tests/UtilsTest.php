@@ -6,35 +6,35 @@ function config($config_name)
 {
     $config = [
         'notify_config' => [
-            'email_tx'         => [
-                'type'       => 'email',
-                'signature'  => 'email_tx',
-                'host'       => 'smtp.exmail.qq.com',
-                'port'       => '465',
-                'username'   => 'noreply@xxx.com',
-                'password'   => '', //腾讯的要用专用密码登陆
+            'email_tx' => [
+                'type' => 'email',
+                'signature' => 'email_tx',
+                'host' => 'smtp.exmail.qq.com',
+                'port' => '465',
+                'username' => 'noreply@xxx.com',
+                'password' => '', //腾讯的要用专用密码登陆
                 'SMTPSecure' => 'ssl',
-                'fromEmail'  => 'noreply@xxx.com',
-                'fromName'   => 'name',
-                'debug'      => 3,
+                'fromEmail' => 'noreply@xxx.com',
+                'fromName' => 'name',
+                'debug' => 3,
             ],
             'work_xxx_1000002' => [
-                'type'      => 'wechatwork',
+                'type' => 'wechatwork',
                 'signature' => 'work_xxx_1000002',
-                'appid'     => 'xxx',
+                'appid' => 'xxx',
                 'appsecret' => 'xxxxx',
-                'agentid'   => '1000002',
+                'agentid' => '1000002',
             ],
-            'offical_xxx'      => [
-                'type'      => 'wechatoffical',
+            'offical_xxx' => [
+                'type' => 'wechatoffical',
                 'signature' => 'offical_xxx',
-                'appid'     => 'xxx',
+                'appid' => 'xxx',
                 'appsecret' => 'xxxxx',
             ],
-            'mini_xxx'         => [
-                'type'      => 'miniprogram',
+            'mini_xxx' => [
+                'type' => 'miniprogram',
                 'signature' => 'mini_xxx',
-                'appid'     => 'xxx',
+                'appid' => 'xxx',
                 'appsecret' => 'xxxx',
             ],
         ],
@@ -51,33 +51,33 @@ class UtilsTest
     public static function getData($type)
     {
         $config = [
-            'wechatwork'    => [
-                'type'   => 'wechatwork',
+            'wechatwork' => [
+                'type' => 'wechatwork',
                 'config' => config('notify_config')['work_xxx_1000002'],
-                'msg'    => [
-                    'touser'   => 'userid',
-                    'msgtype'  => 'textcard',
+                'msg' => [
+                    'touser' => 'userid',
+                    'msgtype' => 'textcard',
                     'textcard' => [
-                        'title'       => 'title',
+                        'title' => 'title',
                         'description' => 'description',
-                        'url'         => 'url',
+                        'url' => 'url',
                     ],
                 ],
             ],
 
             'wechatoffical' => [
-                'type'   => 'wechatoffical',
+                'type' => 'wechatoffical',
                 'config' => config('notify_config')['offical_xxx'],
-                'msg'    => [
-                    'touser'      => 'openid',
+                'msg' => [
+                    'touser' => 'openid',
                     'template_id' => 'template_id',
-                    'url'         => 'https://www.dongdavid.com',
+                    'url' => 'https://www.dongdavid.com',
                     'miniprogram' => [
-                        'appid'    => '',
+                        'appid' => '',
                         'pagepath' => '',
                     ],
-                    'data'        => [
-                        'first'    => [
+                    'data' => [
+                        'first' => [
                             'value' => '哈喽，我是first one',
                         ],
                         'keyword1' => [
@@ -87,43 +87,43 @@ class UtilsTest
                         'keyword2' => [
                             'value' => '我是关键词二号',
                         ],
-                        'remark'   => [
+                        'remark' => [
                             'value' => '我是备注了啊',
                         ],
                     ],
                 ],
             ],
-            'miniprogram'   => [
-                'type'   => 'miniprogram',
+            'miniprogram' => [
+                'type' => 'miniprogram',
                 'config' => config('notify_config')['mini_xxx'],
-                'msg'    => [
-                    'touser'            => 'oBEIa0cr36R6FTCppAvgKLoKG9FY',
-                    'template_id'       => '0OHAj375XtCEVwJaASmRv79c4KhlqzN_mtsmNn6qHGg',
-                    'page'              => '',
+                'msg' => [
+                    'touser' => 'oBEIa0cr36R6FTCppAvgKLoKG9FY',
+                    'template_id' => '0OHAj375XtCEVwJaASmRv79c4KhlqzN_mtsmNn6qHGg',
+                    'page' => '',
                     'miniprogram_state' => 'developer', //跳转小程序类型：developer为开发版；trial为体验版；formal为正式版；默认为正式版
-                    'data'              => [
+                    'data' => [
                         'thing1' => [
                             'value' => '哈喽，我是first one',
                         ],
-                        'time2'  => [
+                        'time2' => [
                             'value' => date('Y-m-d H:i'),
                         ],
                     ],
                 ],
             ],
-            'email'         => [
-                'type'   => 'email',
+            'email' => [
+                'type' => 'email',
                 'config' => config('notify_config')['email_tx'],
-                'msg'    => [
-                    'subject'     => '邮件主旨',
-                    'body'        => '邮件内容',
-                    'touser'      => [
+                'msg' => [
+                    'subject' => '邮件主旨',
+                    'body' => '邮件内容',
+                    'touser' => [
                         [
                             'emailAddress' => 'receiver@outlook.com',
-                            'name'         => '收件人名字',
+                            'name' => '收件人名字',
                         ],
                     ],
-                    'cc'          => [],
+                    'cc' => [],
                     'attachments' => [
                         // './public/robots.txt',
                     ],
@@ -157,9 +157,9 @@ class UtilsTest
             ->withAnyArgs()
             ->andReturn([
                 'expire_time' => time() + 7000,
-                'ticket'      => 'mock_access_token',
-                'signature'   => '',
-                'type'        => '',
+                'ticket' => 'mock_access_token',
+                'signature' => '',
+                'type' => '',
             ]);
     }
 }

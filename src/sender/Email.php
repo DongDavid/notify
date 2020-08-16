@@ -39,8 +39,8 @@ class Email extends Sender
         if (!isset($this->config['SMTPOptions'])) {
             $this->config['SMTPOptions'] = [
                 'ssl' => [
-                    'verify_peer'       => false,
-                    'verify_peer_name'  => false,
+                    'verify_peer' => false,
+                    'verify_peer_name' => false,
                     'allow_self_signed' => true,
                 ],
             ];

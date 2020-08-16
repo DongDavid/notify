@@ -63,12 +63,12 @@ class NotifyTest extends TestCase
     {
         // 设置Http和Redis的mock
         UtilsTest::setUtilsMock();
-        $data = UtilsTest::getData('minprogram');
+        $data = UtilsTest::getData('miniprogram');
         $res = Notify::send($data);
         $this->assertSame(true, $res);
     }
-    public function testSendEmail()
-    {
+    // public function testSendEmail()
+    // {
         // 设置Http和Redis的mock
         // UtilsTest::setUtilsMock();
         // $mail = \Mockery::mock('overload:\PHPMailer\PHPMailer\PHPMailer');
@@ -83,5 +83,5 @@ class NotifyTest extends TestCase
         // $data = UtilsTest::getData('email');
         // $res = Notify::send($data);
         // $this->assertSame(true, $res);
-    }
+    // }
 }

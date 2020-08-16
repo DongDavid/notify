@@ -7,11 +7,11 @@ class Redis
     const PREFIX = 'cr-';
     private static $redis;
     private static $redisConfig = [
-        'host'     => '127.0.0.1',
-        'port'     => '6379',
+        'host' => '127.0.0.1',
+        'port' => '6379',
         'password' => '',
-        'select'   => 6,
-        'timeout'  => 3,
+        'select' => 6,
+        'timeout' => 3,
     ];
 
     // 覆盖redis连接配置

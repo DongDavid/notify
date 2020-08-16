@@ -9,7 +9,6 @@ class NotifyTest extends TestCase
 {
     public function testSetRedisConfigWithInvalidConfig()
     {
-
         // 断言会抛出此异常类
         $this->expectException(\Exception::class);
 

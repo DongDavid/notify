@@ -29,7 +29,7 @@ class WechatManager
             throw new \Exception('获取企业微信access_token失败:'.$res['errcode'].$res['errmsg']);
         }
         $data = [
-            'access_token'=> $access_token,
+            'access_token' => $access_token,
             'expire_time' => time() + 7000,
         ];
 
@@ -46,7 +46,7 @@ class WechatManager
             throw new \Exception('获取微信公众号access_token失败:'.$res['errcode'].$res['errmsg']);
         }
         $data = [
-            'access_token'=> $access_token,
+            'access_token' => $access_token,
             'expire_time' => time() + 7000,
         ];
 
@@ -63,7 +63,7 @@ class WechatManager
             throw new \Exception('获取小程序access_token失败:'.$res['errcode'].$res['errmsg']);
         }
         $data = [
-            'access_token'=> $access_token,
+            'access_token' => $access_token,
             'expire_time' => time() + 7000,
         ];
 
@@ -101,10 +101,10 @@ class WechatManager
         }
         $key = 'access_token-'.$config['signature'];
         $data = [
-            'ticket'     => $result['access_token'],
-            'type'       => 'access_token',
-            'signature'  => $config['signature'],
-            'expire_time'=> $result['expire_time'],
+            'ticket' => $result['access_token'],
+            'type' => 'access_token',
+            'signature' => $config['signature'],
+            'expire_time' => $result['expire_time'],
         ];
 
         Redis::set($key, json_encode($data));

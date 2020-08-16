@@ -41,7 +41,7 @@ class WechatWork extends Sender
             throw new \Exception('消息类型未传入');
         }
 
-        if ($msg['msgtype'] == 'textcard') {
+        if ('textcard' == $msg['msgtype']) {
             if (!isset($msg['textcard'])) {
                 throw new \Exception('未传入消息主体');
             }
@@ -57,7 +57,7 @@ class WechatWork extends Sender
             if (!isset($msg['textcard']['url'])) {
                 throw new \Exception('未设置跳转链接');
             }
-        } elseif ($msg['msgtype'] == 'text') {
+        } elseif ('text' == $msg['msgtype']) {
             if (!isset($msg['text'])) {
                 throw new \Exception('未传入消息主体');
             }
@@ -84,7 +84,7 @@ class WechatWork extends Sender
         if (!isset($res['errcode'])) {
             throw new \Exception('发送失败:网络错误,无法请求微信服务器');
         }
-        if ($res['errcode'] == 0) {
+        if (0 == $res['errcode']) {
             return true;
         } else {
             if (in_array($res['errcode'], ['40014', '41001', '42001'])) {

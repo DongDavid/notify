@@ -7,10 +7,10 @@ use Dongdavid\Notify\utils\Redis;
 class Notify
 {
     protected static $types = [
-        'email'        => 'Email',
-        'wechatoffical'=> 'WechatOffical',
-        'wechatwork'   => 'WechatWork',
-        'miniprogram'  => 'MiniProgram',
+        'email' => 'Email',
+        'wechatoffical' => 'WechatOffical',
+        'wechatwork' => 'WechatWork',
+        'miniprogram' => 'MiniProgram',
     ];
 
     private static function buildConnector($type)

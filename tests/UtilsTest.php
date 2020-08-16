@@ -1,4 +1,5 @@
 <?php
+
 namespace Dongdavid\Notify\Tests;
 
 function config($config_name)
@@ -40,17 +41,13 @@ function config($config_name)
     ];
     if (!isset($config[$config_name])) {
         throw new \Exception('配置不存在');
-
     }
-    return $config[$config_name];
 
+    return $config[$config_name];
 }
-/**
- *
- */
+
 class UtilsTest
 {
-
     public static function getData($type)
     {
         $config = [
@@ -62,7 +59,7 @@ class UtilsTest
                     'msgtype'  => 'textcard',
                     'textcard' => [
                         'title'       => 'title',
-                        'description' => "description",
+                        'description' => 'description',
                         'url'         => 'url',
                     ],
                 ],
@@ -115,7 +112,7 @@ class UtilsTest
                 ],
             ],
             'email'         => [
-                'type' => 'email',
+                'type'   => 'email',
                 'config' => config('notify_config')['email_tx'],
                 'msg'    => [
                     'subject'     => '邮件主旨',
@@ -133,8 +130,10 @@ class UtilsTest
                 ],
             ],
         ];
+
         return $config[$type];
     }
+
     public static function setUtilsMock()
     {
         // 模拟获取access_token的http接口
@@ -147,7 +146,7 @@ class UtilsTest
         $http->shouldReceive('post')
             ->once()
             ->withAnyArgs()
-            ->andReturn(['errcode' => 0, 'errmsg' => "success"]);
+            ->andReturn(['errcode' => 0, 'errmsg' => 'success']);
 
         // 模拟redis接口
         $redis = \Mockery::mock('alias:\Dongdavid\Notify\utils\Redis');

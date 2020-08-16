@@ -1,9 +1,7 @@
 <?php
+
 namespace Dongdavid\Notify\utils;
 
-/**
- *
- */
 class Redis
 {
     const PREFIX = 'cr-';
@@ -45,38 +43,40 @@ class Redis
         if (isset($config['select'])) {
             self::$redis->select($config['select']);
         }
+
         return self::$redis;
     }
 
     public static function set($key, $value)
     {
         if (!is_string($key)) {
-            throw new \Exception("require key type is String");
+            throw new \Exception('require key type is String');
         }
         if (!is_string($value)) {
             if (is_array($value)) {
                 $value = json_encode($value);
             } else {
-                throw new \Exception("require value type is String or Array");
+                throw new \Exception('require value type is String or Array');
             }
         }
         if (!self::$redis) {
             self::connect();
         }
-        self::$redis->set(self::PREFIX . $key, $value);
+        self::$redis->set(self::PREFIX.$key, $value);
     }
 
     public static function get($key)
     {
         if (!is_string($key)) {
-            throw new \Exception("require key type is String");
+            throw new \Exception('require key type is String');
         }
         if (!self::$redis) {
             self::connect();
         }
 
-        $value = self::$redis->get(self::PREFIX . $key);
-        $json  = json_decode($value, true);
+        $value = self::$redis->get(self::PREFIX.$key);
+        $json = json_decode($value, true);
+
         return $json ? $json : $value;
     }
 }

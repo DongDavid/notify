@@ -1,15 +1,12 @@
 <?php
+
 namespace Dongdavid\Notify\Tests;
 
 use Dongdavid\Notify\Notify;
 use PHPUnit\Framework\TestCase;
 
-/**
- *
- */
 class NotifyTest extends TestCase
 {
-
     public function testSetRedisConfigWithInvalidConfig()
     {
 
@@ -35,8 +32,8 @@ class NotifyTest extends TestCase
         Notify::name('what');
 
         $this->fail('Failed to assert setRedisConfig throw exception with invalid argument.');
-
     }
+
     // 低版本的phpunit没有这个断言方法 去掉
     // public function testNameWithValidType()
     // {
@@ -52,6 +49,7 @@ class NotifyTest extends TestCase
         $res = Notify::send($data);
         $this->assertSame(true, $res);
     }
+
     public function testSendWechatOffical()
     {
         // 设置Http和Redis的mock
@@ -60,6 +58,7 @@ class NotifyTest extends TestCase
         $res = Notify::send($data);
         $this->assertSame(true, $res);
     }
+
     public function testSendMiniProgram()
     {
         // 设置Http和Redis的mock
@@ -68,6 +67,7 @@ class NotifyTest extends TestCase
         $res = Notify::send($data);
         $this->assertSame(true, $res);
     }
+
     // public function testSendEmail()
     // {
         // 设置Http和Redis的mock
@@ -79,7 +79,6 @@ class NotifyTest extends TestCase
         //      ->andReturn(true);
         // $phpmailer = \Mockery::mock(\PHPMailer\PHPMailer\PHPMailer::class);
         // $phpmailer->allows()->send()->andReturn(true);
-
 
         // $data = UtilsTest::getData('email');
         // $res = Notify::send($data);

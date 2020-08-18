@@ -298,7 +298,11 @@ touch index.php
 ## TODO  
 
 * 增加单元测试 - 我可能把单元测试写成了功能测试了，我得先去学一下怎么做单元测试😭
-* 增加结合think-queue实现消息发送队列教程
+
+## 例子  
+
+[结合think-queue实现消息发送队列教程](./docs/install-with-think-queue.md)
+
 
 ## Contributing
 

@@ -3,6 +3,7 @@
 
 [![Build Status](https://travis-ci.com/DongDavid/notify.svg?branch=master)](https://travis-ci.com/DongDavid/notify)
 [![StyleCI](https://github.styleci.io/repos/286964633/shield)](https://github.styleci.io/repos/286964633)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/DongDavid/notify/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/DongDavid/notify/?branch=master)
 [![Total Downloads](https://poser.pugx.org/dongdavid/notify/downloads)](https://packagist.org/packages/dongdavid/notify)
 [![License](https://poser.pugx.org/dongdavid/notify/license)](https://packagist.org/packages/dongdavid/notify)  
 

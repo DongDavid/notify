@@ -105,7 +105,7 @@ class WechatManager
             'signature' => $config['signature'],
             'expire_time' => $result['expire_time'],
         ];
-        \Dongdavid\Notify\cache($key,$data);
+        \Dongdavid\Notify\cache($key, $data);
 
         return $data['ticket'];
     }

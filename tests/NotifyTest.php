@@ -7,7 +7,6 @@ use PHPUnit\Framework\TestCase;
 
 class NotifyTest extends TestCase
 {
-
     public function testNameWithInvalidType()
     {
         // 断言会抛出此异常类

@@ -3,7 +3,6 @@
 namespace Dongdavid\Notify;
 
 use Dongdavid\Notify\utils\Http;
-use Dongdavid\Notify\utils\Redis;
 
 class WechatManager
 {
@@ -74,7 +73,7 @@ class WechatManager
     public static function getAccessToken($config)
     {
         $key = 'access_token-'.$config['signature'];
-        $data = Redis::get($key);
+        $data = \Dongdavid\Notify\cache($key);
         if ($data['expire_time'] > time()) {
             return $data['ticket'];
         }
@@ -106,8 +105,7 @@ class WechatManager
             'signature' => $config['signature'],
             'expire_time' => $result['expire_time'],
         ];
-
-        Redis::set($key, json_encode($data));
+        \Dongdavid\Notify\cache($key,$data);
 
         return $data['ticket'];
     }

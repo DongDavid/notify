@@ -7,18 +7,6 @@ use PHPUnit\Framework\TestCase;
 
 class NotifyTest extends TestCase
 {
-    public function testSetRedisConfigWithInvalidConfig()
-    {
-        // 断言会抛出此异常类
-        $this->expectException(\Exception::class);
-
-        // 断言异常消息为 'Invalid type value(base/all): foo'
-        $this->expectExceptionMessage('非法的配置');
-
-        Notify::setRedisConfig([]);
-
-        $this->fail('Failed to assert setRedisConfig throw exception with invalid argument.');
-    }
 
     public function testNameWithInvalidType()
     {

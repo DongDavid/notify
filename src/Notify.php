@@ -2,8 +2,6 @@
 
 namespace Dongdavid\Notify;
 
-use Dongdavid\Notify\utils\Redis;
-
 class Notify
 {
     protected static $types = [
@@ -37,11 +35,4 @@ class Notify
         return self::buildConnector($type);
     }
 
-    public static function setRedisConfig($config)
-    {
-        if (empty($config)) {
-            throw new \Exception('非法的配置');
-        }
-        Redis::setConfig($config);
-    }
 }

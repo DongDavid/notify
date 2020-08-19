@@ -1,4 +1,5 @@
 <?php
+
 namespace Dongdavid\Notify;
 
 use Dongdavid\Notify\utils\Redis;
@@ -11,7 +12,7 @@ if (!function_exists('cache')) {
             // name 若传入为数组，则当作redis链接配置
             Redis::setConfig($name);
         } else {
-            if ($value === null) {
+            if (null === $value) {
                 return Redis::get($name);
             } else {
                 Redis::set($name, $value);

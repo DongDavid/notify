@@ -34,5 +34,4 @@ class Notify
     {
         return self::buildConnector($type);
     }
-
 }

@@ -31,14 +31,15 @@ $ composer require dongdavid/notify -vvv
 如使用微信公众号/企业微信/微信小程序消息通知，则需要配置redis缓存access_token  
 
 ```php
-# 默认配置
-Notify::setRedisConfig([
+# 修改配置
+\Dongdavid\Notify\cache(
+    // 默认配置
     'host'     => '127.0.0.1',
     'port'     => '6379',
     'password' => '',
     'select'   => 6,
     'timeout'  => 3,
-]);
+])
 ```
 
 有两种使用方式，一种是直接将配置参数一并传入，另一种是定义`config`方法来获取配置，传入配置名称
@@ -178,30 +179,29 @@ Notify::send($notify);
 
 在框架中使用,或者自定义一个`config`方法来获取配置  
 
-在`Sender.php`中会使用`config('notify_config')`来获取所有的消息发送配置，
+在`helper.php`中会使用`\Dongdavid\Notify\config('notify_config')`来获取所有的消息发送配置，
 所以需要确保你能够通过`config('notify_config')['config_name']`来获取到对应的配置
 
 ```php
-public function setConfig($config)
-{
-    if (is_string($config)) {
-        if (!isset(config('notify_config')[$config])) {
-            throw new InvalidArgumentException("无效的配置:".$config);
+if (!function_exists('config')) {
+    function config($name, $value = null)
+    {
+        if (null !== $value) {
+            \Dongdavid\Notify\cache('notify-config', $value);
+        } else {
+            return \Dongdavid\Notify\cache('notify-config');
         }
-        $this->config = config('notify_config')[$config];
-    }else{
-        $this->config = $config;
     }
-
-
-    // 检查配置是否完整
-    $this->checkConfig();
-
-    return $this;
+} else {
+    function config($name, $value = null)
+    {
+        return \config($name, $value);
+    }
 }
 ```
 
 ```php
+# 预定义一个config方法用于获取配置
 function config($config_name)
 {
     $config = [
@@ -241,6 +241,8 @@ function config($config_name)
     ];
     return $config[$config_name];
 }
+# 动态注入配置 
+\Dongdavid\Notify\config('notify_config',$configs);
 
 $data = [
     'type'   => 'email',

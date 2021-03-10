@@ -16,7 +16,7 @@ class Notify
      * 获取可发送消息类型
      * @return string[]
      */
-    public static function getTypes(): array
+    public static function getTypes()
     {
         return array_keys(self::$types);
     }

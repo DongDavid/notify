@@ -9,7 +9,88 @@
 
 
 
+```php
+function offical($account)
+{
+    $data = [
+        'access_token'=>$account['wechatoffical']['token'],
+        'openid'=>$account['wechatoffical']['openid'],
+        'template_id'=>$account['wechatoffical']['template_id'],
+        'data'=>[
+            'first'=>['value'=>'first is me'],
+            'keyword1'=>['value'=>'哈哈哈'],
+            'keyword2'=>['value'=>number_format(23.32,2)],
+            'remark'=>['value'=>'备注信息'],
+        ],
 
+    ];
+
+
+    $d = QuickSend::offical($data['access_token'],$data['openid'],$data['template_id'],$data['data']);
+    var_dump($d);
+}
+function mini($account)
+{
+    $data = [
+        'access_token'=>$account['miniprogram']['token'],
+        'openid'=>$account['miniprogram']['openid'],
+        'template_id'=>$account['miniprogram']['template_id'],
+        'data'=>[
+            'thing1'=>['value'=>'first is me'],
+            'thing3'=>['value'=>'哈哈哈'],
+            'time2'=>['value'=>23.32],
+        ],
+
+    ];
+
+    $d = QuickSend::miniProgram($data['access_token'],$data['openid'],$data['template_id'],$data['data']);
+    var_dump($d);
+}
+function email($account)
+{
+    // to、cc、bcc 可以支持字符串、数组，如果是二维数组， 则子数组必须要有键[email]保存邮箱地址
+    // attachments 支持字符串、数组，如果是二维数组，则子数组必须要有键[filepath]来保存文件路径，会自动转换成绝对路径
+    // config参考phpmailer，
+    $data = [
+        'config'=>$account['mail'],
+        'subject'=>'测试邮件',
+        'body'=>'邮件正文',
+        'to'=>[
+            'xxx@outlook.com',
+        ],
+        'cc'=>[
+            ['email'=>'xxx@live.com','name'=>'收件人昵称'],
+        ],
+        'bcc'=>'xxx@qq.com',
+        'attachments'=>[
+            './aa.md',
+            ['filepath'=>'./bb.md','filename'=>'说明文件.txt']
+        ],
+        //'attachments'=>'./aa.md',
+    ];
+    $d = QuickSend::mail($data['config'],$data['subject'],$data['body'],$data['to'],$data['attachments'],$data['cc'],$data['bcc']);
+    var_dump($d);
+}
+function alisms($account)
+{
+    $data = [
+        'config'=>[
+            'accessKeyId'=>$account['alisms']['accessKeyId'],
+            'accessKeySecret'=>$account['alisms']['accessKeySecret'],
+            'SignName'=>$account['alisms']['SignName'],
+            'template_code'=>$account['alisms']['template_code'],
+        ],
+        'phone'=>$account['alisms']['phone'],
+        'template_param'=>[
+            'name'=>'皮皮虾',
+            'course_name'=>'如何上天',
+        ],
+    ];
+    $d = QuickSend::alisms($data['config'],$data['phone'],$data['template_param']);
+    var_dump($d);
+}
+
+```
 
 ## Requirements  
 
@@ -294,7 +375,7 @@ mkdir notify-test
 cd notify-test
 composer init  
 composer config repositories.notify path ../notify  
-composer require dongdaivd/notify:dev-master
+composer require dongdavid/notify:dev-master
 touch index.php
 ```
 

@@ -27,32 +27,32 @@ class NotifyTest extends TestCase
     //     $this->assertIsObject($sender, '返回的不是sender对象');
     // }
 
-    public function testSendWechatWork()
-    {
-        // 设置Http和Redis的mock
-        UtilsTest::setUtilsMock();
-        $data = UtilsTest::getData('wechatwork');
-        $res = Notify::send($data);
-        $this->assertSame(true, $res);
-    }
-
-    public function testSendWechatOffical()
-    {
-        // 设置Http和Redis的mock
-        UtilsTest::setUtilsMock();
-        $data = UtilsTest::getData('wechatoffical');
-        $res = Notify::send($data);
-        $this->assertSame(true, $res);
-    }
-
-    public function testSendMiniProgram()
-    {
-        // 设置Http和Redis的mock
-        UtilsTest::setUtilsMock();
-        $data = UtilsTest::getData('miniprogram');
-        $res = Notify::send($data);
-        $this->assertSame(true, $res);
-    }
+    //public function testSendWechatWork()
+    //{
+    //    // 设置Http和Redis的mock
+    //    UtilsTest::setUtilsMock();
+    //    $data = UtilsTest::getData('wechatwork');
+    //    $res = Notify::send($data);
+    //    $this->assertSame(true, $res);
+    //}
+    //
+    //public function testSendWechatOffical()
+    //{
+    //    // 设置Http和Redis的mock
+    //    UtilsTest::setUtilsMock();
+    //    $data = UtilsTest::getData('wechatoffical');
+    //    $res = Notify::send($data);
+    //    $this->assertSame(true, $res);
+    //}
+    //
+    //public function testSendMiniProgram()
+    //{
+    //    // 设置Http和Redis的mock
+    //    UtilsTest::setUtilsMock();
+    //    $data = UtilsTest::getData('miniprogram');
+    //    $res = Notify::send($data);
+    //    $this->assertSame(true, $res);
+    //}
 
     // public function testSendEmail()
     // {

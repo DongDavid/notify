@@ -12,19 +12,8 @@ class WechatOffical extends Sender
 
     public function checkConfig()
     {
-        if (!isset($this->config['signature'])) {
-            throw new \Exception('WechatOffical config require signature');
-        }
-        if (!isset($this->config['appid'])) {
-            throw new \Exception('WechatOffical config require appid');
-        }
-        if (!isset($this->config['appsecret'])) {
-            throw new \Exception('WechatOffical config require appsecret');
-        }
-
-        $this->config['access_token'] = WechatManager::getAccessToken($this->config);
         if (!$this->config['access_token']) {
-            throw new InvalidArgumentException('notify config require access_token ');
+            throw new InvalidArgumentException('缺失access_token');
         }
     }
 
@@ -41,6 +30,16 @@ class WechatOffical extends Sender
         if (!isset($msg['data'])) {
             throw new \Exception('未设置消息内容');
         }
+        foreach ($msg['data'] as $item) {
+            if (!isset($item['value'])){
+                throw new \Exception("模版消息内容未设置value");
+            }
+        }
+        if (isset($msg['miniprogram'])){
+            if (!isset($msg['miniprogram']['appid'])){
+                throw new \Exception("缺失小程序appId");
+            }
+        }
     }
 
     public function send($msg)
@@ -49,21 +48,20 @@ class WechatOffical extends Sender
         // 发送
         $res = $this->sendTemplate($msg);
 
-        if (isset($res['code']) && 0 == $res['code']) {
+        if (isset($res['errcode']) && 0 == $res['errcode']) {
             return true;
         }
         if (!isset($res['errcode'])) {
             throw new \Exception('发送失败:网络错误,无法请求微信服务器');
         }
-        if (0 == $res['errcode']) {
-            return true;
-        } else {
-            if (in_array($res['errcode'], ['40014', '41001', '42001'])) {
-                $this->config['access_token'] = WechatManager::updateAccessToken($this->config);
-            }
-
-            throw new \Exception('发送失败:'.$res['errcode'].$res['errmsg']);
-        }
+        //if (0 == $res['errcode']) {
+        //    return true;
+        //} else {
+        //    //if (in_array($res['errcode'], ['40014', '41001', '42001'])) {
+        //        //$this->config['access_token'] = WechatManager::updateAccessToken($this->config);
+        //    //}
+        //}
+        throw new \Exception('发送失败:'.$res['errcode'].$res['errmsg']);
     }
 
     public function sendTemplate($msg)

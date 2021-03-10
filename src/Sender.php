@@ -20,15 +20,7 @@ abstract class Sender
 
     public function setConfig($config)
     {
-        if (is_string($config)) {
-            if (!isset(\Dongdavid\Notify\config('notify_config')[$config])) {
-                throw new InvalidArgumentException('无效的配置:'.$config);
-            }
-            $this->config = \Dongdavid\Notify\config('notify_config')[$config];
-        } else {
-            $this->config = $config;
-        }
-
+        $this->config = $config;
         // 检查配置是否完整
         $this->checkConfig();
 

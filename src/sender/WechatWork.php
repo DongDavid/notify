@@ -4,7 +4,6 @@ namespace Dongdavid\Notify\sender;
 
 use Dongdavid\Notify\Exceptions\InvalidArgumentException;
 use Dongdavid\Notify\Sender;
-use Dongdavid\Notify\WechatManager;
 
 class WechatWork extends Sender
 {
@@ -12,20 +11,6 @@ class WechatWork extends Sender
 
     public function checkConfig()
     {
-        if (!isset($this->config['agentid'])) {
-            throw new InvalidArgumentException('WechatWork config require agentid');
-        }
-        if (!isset($this->config['signature'])) {
-            throw new InvalidArgumentException('WechatWork config require signature');
-        }
-        if (!isset($this->config['appid'])) {
-            throw new \Exception('WechatWork config require appid');
-        }
-        if (!isset($this->config['appsecret'])) {
-            throw new \Exception('WechatWork config require appsecret');
-        }
-
-        $this->config['access_token'] = WechatManager::getAccessToken($this->config);
         if (!$this->config['access_token']) {
             throw new InvalidArgumentException('notify config require access_token ');
         }

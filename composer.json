@@ -10,7 +10,8 @@
     ],
     "require": {
         "guzzlehttp/guzzle": "^6.3",
-        "phpmailer/phpmailer": "^6.1"
+        "phpmailer/phpmailer": "^6.1",
+        "alibabacloud/client": "^1.5"
     },
     "autoload": {
         "psr-4": {

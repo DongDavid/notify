@@ -2,42 +2,31 @@
 
 namespace Dongdavid\Notify;
 
-use Dongdavid\Notify\utils\Redis;
+use Dongdavid\Notify\utils\Http;
 
 // 如果没有cache方法就自定义一个方法用redis做缓存
-if (!function_exists('cache')) {
-    function cache($name, $value = null)
+if (!function_exists('getAccessToken')) {
+    function getAccessToken($type,$appId,$appSecret,$agentid = 0)
     {
-        if (is_array($name)) {
-            // name 若传入为数组，则当作redis链接配置
-            Redis::setConfig($name);
-        } else {
-            if (null === $value) {
-                return Redis::get($name);
-            } else {
-                Redis::set($name, $value);
-            }
+        switch ($type){
+            case 'wechatoffical':
+                $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid={$appId}&secret={$appSecret}";
+                break;
+            case 'miniprogram':
+                $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid={$appId}&secret={$appSecret}";
+                break;
+            default:
+                return '类型错误';
         }
-    }
-} else {
-    function cache($name, $value = null)
-    {
-        return \cache($name, $value);
-    }
-}
+        echo $url;
+        $res = Http::get($url);
+        if (isset($res['access_token'])){
+            return $res;
+        }else{
+            return $res;
+        }
 
-if (!function_exists('config')) {
-    function config($name, $value = null)
-    {
-        if (null !== $value) {
-            \Dongdavid\Notify\cache('notify-config', $value);
-        } else {
-            return \Dongdavid\Notify\cache('notify-config');
-        }
-    }
-} else {
-    function config($name, $value = null)
-    {
-        return \config($name, $value);
+
+
     }
 }

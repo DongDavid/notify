@@ -125,7 +125,7 @@ class QuickSend
      * @param  array  $template_param
      * @return array|string
      */
-    public function alisms($config,$phone,$template_param = [])
+    public static function alisms($config,$phone,$template_param = [])
     {
         $msg = [
             'type'=>'alisms',

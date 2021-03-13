@@ -9,21 +9,23 @@ class Notify
         'wechatoffical' => 'WechatOffical',
         'wechatwork' => 'WechatWork',
         'miniprogram' => 'MiniProgram',
-        'alisms'=>'AliSms',
+        'alisms' => 'AliSms',
     ];
 
     /**
-     * 获取可发送消息类型
+     * 获取可发送消息类型.
+     *
      * @return string[]
      */
     public static function getTypes()
     {
         return array_keys(self::$types);
     }
+
     private static function buildConnector($type)
     {
         $type = strtolower($type);
-        if ( ! isset(self::$types[$type])) {
+        if (!isset(self::$types[$type])) {
             throw new \Exception('错误的通知类型:'.$type);
         }
 

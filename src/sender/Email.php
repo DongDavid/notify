@@ -36,13 +36,13 @@ class Email extends Sender
         }
         if (!isset($this->config['SMTPSecure'])) {
             $this->config['SMTPSecure'] = false;
-            $this->config['SMTPOptions'] = array(
-                'ssl' => array(
+            $this->config['SMTPOptions'] = [
+                'ssl' => [
                     'verify_peer' => false,
                     'verify_peer_name' => false,
-                    'allow_self_signed' => true
-                )
-            );
+                    'allow_self_signed' => true,
+                ],
+            ];
         }
         if (!isset($this->config['SMTPOptions'])) {
             $this->config['SMTPOptions'] = [
@@ -71,50 +71,50 @@ class Email extends Sender
 
         if (!isset($msg['to'])) {
             throw new \Exception('收件人未设置');
-        }else{
+        } else {
             $msg['to'] = $this->checkEmailAddress($msg['to']);
         }
-        if (isset($msg['cc'])){
+        if (isset($msg['cc'])) {
             $msg['cc'] = $this->checkEmailAddress($msg['cc']);
         }
-        if (isset($msg['bcc'])){
+        if (isset($msg['bcc'])) {
             $msg['bcc'] = $this->checkEmailAddress($msg['bcc']);
         }
         if (isset($msg['attachments'])) {
             $msg['attachments'] = $this->checkAttachments($msg['attachments']);
         }
+
         return $msg;
     }
 
     public function checkEmailAddress($emailAddresses)
     {
-        if (is_string($emailAddresses)){
-            if (filter_var($emailAddresses,FILTER_VALIDATE_EMAIL)){
+        if (is_string($emailAddresses)) {
+            if (filter_var($emailAddresses, FILTER_VALIDATE_EMAIL)) {
                 return [
-                    ['email'=>$emailAddresses,'name'=>$emailAddresses]
+                    ['email' => $emailAddresses, 'name' => $emailAddresses],
                 ];
-            }else{
-                throw new \Exception("邮箱格式不正确:".$emailAddresses);
+            } else {
+                throw new \Exception('邮箱格式不正确:'.$emailAddresses);
             }
-        }elseif (is_array($emailAddresses)){
+        } elseif (is_array($emailAddresses)) {
             foreach ($emailAddresses as &$emailAddress) {
-                if (is_string($emailAddress)){
-                    $emailAddress = ['email'=>$emailAddress,'name'=>$emailAddress];
-
-                }else{
-                    if (!isset($emailAddress['email'])){
-                        throw new Exception("缺失邮箱地址[email]");
+                if (is_string($emailAddress)) {
+                    $emailAddress = ['email' => $emailAddress, 'name' => $emailAddress];
+                } else {
+                    if (!isset($emailAddress['email'])) {
+                        throw new Exception('缺失邮箱地址[email]');
                     }
                 }
-                if (!filter_var($emailAddress['email'],FILTER_VALIDATE_EMAIL)){
-                    throw new \Exception("邮箱格式不正确:".$emailAddress);
+                if (!filter_var($emailAddress['email'], FILTER_VALIDATE_EMAIL)) {
+                    throw new \Exception('邮箱格式不正确:'.$emailAddress);
                 }
             }
+
             return $emailAddresses;
         }
-
-
     }
+
     public function checkAttachments($attachments)
     {
         if (is_string($attachments)) {
@@ -124,32 +124,33 @@ class Email extends Sender
             }
             $attachments = [
                 [
-                    'filepath'=>$path,
-                    'filename'=>basename($path),
-                ]
+                    'filepath' => $path,
+                    'filename' => basename($path),
+                ],
             ];
         } elseif (is_array($attachments)) {
             foreach ($attachments as &$attachment) {
-                if (is_string($attachment)){
+                if (is_string($attachment)) {
                     $attachment = [
-                        'filename'=>basename($attachment),
-                        'filepath'=>realpath($attachment),
+                        'filename' => basename($attachment),
+                        'filepath' => realpath($attachment),
                     ];
                 }
                 if (!file_exists($attachment['filepath'])) {
                     throw new \Exception('附件不存在:'.$attachment);
                 }
             }
-        }else{
-            throw new \Exception("attachments参数格式错误");
+        } else {
+            throw new \Exception('attachments参数格式错误');
         }
-        return $attachments;
 
+        return $attachments;
     }
 
     public function send($msg)
     {
         $msg = $this->checkMsgFormate($msg);
+
         return $this->sendMail($msg);
     }
 
@@ -171,10 +172,10 @@ class Email extends Sender
             $mail->SMTPOptions = $this->config['SMTPOptions'];
             //Recipients
             $mail->setFrom($this->config['fromEmail'], $this->config['fromName']);
-            if (isset($this->config['replyMail'])){
+            if (isset($this->config['replyMail'])) {
                 $mail->setReplyTo($this->config['replyMail']);
             }
-            if (isset($this->config['SMTPOptions'])){
+            if (isset($this->config['SMTPOptions'])) {
                 $mail->SMTPOptions = $this->config['SMTPOptions'];
             }
             // touser
@@ -182,7 +183,6 @@ class Email extends Sender
                 foreach ($msg['to'] as $t) {
                     $mail->addAddress($t['email'], $t['name']);
                 }
-
             }
             // cc
             if (isset($msg['cc']) && is_string($msg['cc'])) {
@@ -192,7 +192,7 @@ class Email extends Sender
             }
 
             // bcc
-            if (isset($msg['bcc'])){
+            if (isset($msg['bcc'])) {
                 foreach ($msg['bcc'] as $bc) {
                     $mail->addBCC($bc['email'], $bc['name']);
                 }
@@ -214,6 +214,7 @@ class Email extends Sender
             if (!$r) {
                 throw new \Exception('邮件发送失败:'.$mail->ErrorInfo);
             }
+
             return true;
         } catch (\Exception $e) {
             throw new \Exception('邮件发送失败:'.$e->getMessage().$e->getLine());

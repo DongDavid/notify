@@ -29,8 +29,8 @@ class MiniProgram extends Sender
             throw new \Exception('未设置消息内容');
         }
         foreach ($msg['data'] as $item) {
-            if (!isset($item['value'])){
-                throw new \Exception("模版消息内容未设置value");
+            if (!isset($item['value'])) {
+                throw new \Exception('模版消息内容未设置value');
             }
         }
     }
@@ -56,7 +56,6 @@ class MiniProgram extends Sender
         //    throw new \Exception('发送失败:'.$res['errcode'].$res['errmsg']);
         //}
         throw new \Exception('发送失败:'.$res['errcode'].$res['errmsg']);
-
     }
 
     public function sendTemplate($msg)

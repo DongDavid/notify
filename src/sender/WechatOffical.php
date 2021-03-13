@@ -31,13 +31,13 @@ class WechatOffical extends Sender
             throw new \Exception('未设置消息内容');
         }
         foreach ($msg['data'] as $item) {
-            if (!isset($item['value'])){
-                throw new \Exception("模版消息内容未设置value");
+            if (!isset($item['value'])) {
+                throw new \Exception('模版消息内容未设置value');
             }
         }
-        if (isset($msg['miniprogram'])){
-            if (!isset($msg['miniprogram']['appid'])){
-                throw new \Exception("缺失小程序appId");
+        if (isset($msg['miniprogram'])) {
+            if (!isset($msg['miniprogram']['appid'])) {
+                throw new \Exception('缺失小程序appId');
             }
         }
     }

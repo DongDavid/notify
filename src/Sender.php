@@ -2,7 +2,6 @@
 
 namespace Dongdavid\Notify;
 
-use Dongdavid\Notify\Exceptions\InvalidArgumentException;
 use Dongdavid\Notify\utils\Http;
 
 /**
